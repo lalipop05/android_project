@@ -41,6 +41,7 @@ android {
 
 dependencies {
     val nav_version = "2.9.0"
+    val loc_version = "21.3.0"
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -59,4 +60,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation("com.google.android.gms:play-services-location:$loc_version")
 }
