@@ -52,6 +52,20 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    private val locationSettingsLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult()
+    ) { result ->
+        when (result.resultCode) {
+            Activity.RESULT_OK -> {
+                Log.d("GPS", "User enabled location settings")
+                // Proceed with location operations
+            }
+            Activity.RESULT_CANCELED -> {
+                Log.d("GPS", "User declined to enable location settings")
+                // Handle the case where user didn't enable location
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,24 +93,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        when (requestCode) {
-            REQUEST_CHECK_SETTINGS -> {
-                when (resultCode) {
-                    Activity.RESULT_OK -> {
-                        Log.d("GPS", "User enabled location settings")
-                    }
-                    Activity.RESULT_CANCELED -> {
-                        Log.d("GPS", "User declined to enable location settings")
-                    }
-                }
-            }
-        }
-    }
-
 }
 
 

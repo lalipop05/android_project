@@ -5,6 +5,8 @@ import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.Location
 import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.IntentSenderRequest
 import androidx.core.content.ContextCompat
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -77,43 +79,37 @@ object LocationManager {
         }
     }
 
-    fun locationPermsAndEnabled(context: Context, onResult: (Boolean) -> Unit) {
-        val permissionsGranted = checkPermission(context)
-        var enabled = false
-        locationEnabled(context) { statusCode ->
-            if (statusCode == LocationSettingsStatusCodes.SUCCESS) {
-                onResult(enabled && permissionsGranted)
-            } else {
-                onResult(false)
-            }
-        }
-    }
-
-    fun locationEnabled(context: Context, onResult: (Int) -> Unit) {
+    fun locationEnabled(context: Context, locationSettingsLauncher: ActivityResultLauncher<IntentSenderRequest>) {
         val locationRequestHighFiveMins = LocationRequest.Builder(
             Priority.PRIORITY_HIGH_ACCURACY,
-            LOCATION_UPDATES_MILLI).build()
-        val builder: LocationSettingsRequest.Builder = LocationSettingsRequest.Builder()
-            .addLocationRequest(locationRequestHighFiveMins)
-        val result: Task<LocationSettingsResponse> = LocationServices
-            .getSettingsClient(context).checkLocationSettings(builder.build())
+            LOCATION_UPDATES_MILLI
+        ).build()
 
-        result.addOnSuccessListener { response: LocationSettingsResponse ->
-            onResult(LocationSettingsStatusCodes.SUCCESS)
-        }.addOnFailureListener{ err ->
-            if (err is ResolvableApiException) {
-                // settings need to be changed
-                val activity = context.findActivity()
-                if (activity == null) {
-                    onResult(LocationSettingsStatusCodes.DEVELOPER_ERROR)
-                }
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(locationRequestHighFiveMins)
+
+        val result = LocationServices
+            .getSettingsClient(context)
+            .checkLocationSettings(builder.build())
+
+        result.addOnSuccessListener { response ->
+            Log.d("GPS", "Location settings are satisfied")
+            // Proceed with location operations
+        }.addOnFailureListener { exception ->
+            if (exception is ResolvableApiException) {
                 try {
-                    err.startResolutionForResult( activity!!, REQUEST_CHECK_SETTINGS )
+                    // Create IntentSenderRequest for the modern API
+                    val intentSenderRequest = IntentSenderRequest.Builder(
+                        exception.resolution
+                    ).build()
+
+                    // Launch using the modern launcher
+                    locationSettingsLauncher.launch(intentSenderRequest)
                 } catch (sendEx: IntentSender.SendIntentException) {
-                    onResult(LocationSettingsStatusCodes.ERROR)
+                    Log.e("GPS", "Error launching location settings dialog", sendEx)
                 }
             } else {
-                onResult(LocationSettingsStatusCodes.ERROR)
+                Log.e("GPS", "Location settings error", exception)
             }
         }
     }
