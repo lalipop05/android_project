@@ -1,9 +1,12 @@
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.Uri
+import android.provider.Settings
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
@@ -30,7 +33,12 @@ object LocationManager {
         Manifest.permission.ACCESS_BACKGROUND_LOCATION
     )
 
-    val LOCATION_UPDATES_MILLI: Long = 5000
+    val FOREGROUND_PERMISSIONS = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION)
+
+    val BACKGROUND_PERMISSIONS = arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+
+    private val LOCATION_UPDATES_MILLI: Long = 5000
 
     @SuppressLint("MissingPermission")
     fun getLastLocation(context: Context, onResult: (Location?) -> Unit) {
@@ -111,6 +119,17 @@ object LocationManager {
             } else {
                 Log.e("GPS", "Location settings error", exception)
             }
+        }
+    }
+
+    fun openSettings(context: Context) {
+        try {
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                data = Uri.fromParts("package", context.packageName, null)
+            }
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            Log.e("Permission", "Failed to open settings: ${e.message}")
         }
     }
 }

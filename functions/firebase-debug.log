@@ -1,0 +1,268 @@
+[debug] [2025-06-25T23:32:42.794Z] ----------------------------------------------------------------------
+[debug] [2025-06-25T23:32:42.797Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-06-25T23:32:42.797Z] CLI Version:   14.8.0
+[debug] [2025-06-25T23:32:42.797Z] Platform:      win32
+[debug] [2025-06-25T23:32:42.797Z] Node Version:  v20.14.0
+[debug] [2025-06-25T23:32:42.797Z] Time:          Wed Jun 25 2025 18:32:42 GMT-0500 (Central Daylight Time)
+[debug] [2025-06-25T23:32:42.798Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-06-25T23:32:43.021Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-06-25T23:32:43.022Z] > authorizing via signed-in user (lalith.chaitu@gmail.com)
+[debug] [2025-06-25T23:32:43.022Z] [iam] checking project dndandroid-27003 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-06-25T23:32:43.023Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:32:43.023Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:32:43.024Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions [none]
+[debug] [2025-06-25T23:32:43.024Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions x-goog-quota-user=projects/dndandroid-27003
+[debug] [2025-06-25T23:32:43.025Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-06-25T23:32:43.219Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions 200
+[debug] [2025-06-25T23:32:43.219Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-06-25T23:32:43.219Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:32:43.219Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:32:43.219Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-06-25T23:32:43.219Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-06-25T23:32:43.359Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-06-25T23:32:43.359Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'dndandroid-27003'...
+[info] 
+[info] i  deploying functions 
+[debug] [2025-06-25T23:32:43.365Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:32:43.365Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:32:43.366Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003 [none]
+[debug] [2025-06-25T23:32:43.438Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003 200
+[debug] [2025-06-25T23:32:43.438Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003 {"projectNumber":"402888903343","projectId":"dndandroid-27003","lifecycleState":"ACTIVE","name":"DNDAndroid","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-06-25T21:47:38.382107Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-06-25T23:32:43.442Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:32:43.442Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:32:43.442Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/dndandroid-27003/adminSdkConfig [none]
+[debug] [2025-06-25T23:32:43.636Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/dndandroid-27003/adminSdkConfig 200
+[debug] [2025-06-25T23:32:43.637Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/dndandroid-27003/adminSdkConfig {"projectId":"dndandroid-27003","storageBucket":"dndandroid-27003.firebasestorage.app"}
+[debug] [2025-06-25T23:32:43.637Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:32:43.637Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:32:43.637Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/dndandroid-27003/configs [none]
+[debug] [2025-06-25T23:32:43.784Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/dndandroid-27003/configs 200
+[debug] [2025-06-25T23:32:43.784Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/dndandroid-27003/configs {}
+[debug] [2025-06-25T23:32:43.786Z] Customer code is not Node
+[debug] [2025-06-25T23:32:43.786Z] Validating python source
+[debug] [2025-06-25T23:32:43.786Z] Building python source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2025-06-25T23:32:43.788Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-06-25T23:32:43.800Z] Running command with virtualenv: command="C:\College_UTD\Summer_2024\Kotlin\DND\functions\venv\Scripts\activate.bat", args=["","&&","python.exe","-c","\"import firebase_functions; import os; print(os.path.dirname(firebase_functions.__file__))\""]
+[debug] [2025-06-25T23:32:43.974Z] stderr: Traceback (most recent call last):
+
+[debug] [2025-06-25T23:32:43.978Z] stderr:   File "<string>", line 1, in <module>
+    import firebase_functions; import os; print(os.path.dirname(firebase_functions.__file__))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'firebase_functions'
+
+[debug] [2025-06-25T23:32:44.059Z] Error: spawn "C:\College_UTD\Summer_2024\Kotlin\DND\functions\venv\Scripts\activate.bat" ENOENT
+    at notFoundError (C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:6:26)
+    at verifyENOENT (C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:40:16)
+    at cp.emit (C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:27:25)
+    at ChildProcess._handle.onexit (node:internal/child_process:294:12)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-06-25T23:40:43.597Z] ----------------------------------------------------------------------
+[debug] [2025-06-25T23:40:43.600Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-06-25T23:40:43.600Z] CLI Version:   14.8.0
+[debug] [2025-06-25T23:40:43.601Z] Platform:      win32
+[debug] [2025-06-25T23:40:43.601Z] Node Version:  v20.14.0
+[debug] [2025-06-25T23:40:43.601Z] Time:          Wed Jun 25 2025 18:40:43 GMT-0500 (Central Daylight Time)
+[debug] [2025-06-25T23:40:43.601Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-06-25T23:40:43.818Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-06-25T23:40:43.819Z] > authorizing via signed-in user (lalith.chaitu@gmail.com)
+[debug] [2025-06-25T23:40:43.819Z] [iam] checking project dndandroid-27003 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-06-25T23:40:43.820Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:40:43.820Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:40:43.821Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions [none]
+[debug] [2025-06-25T23:40:43.822Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions x-goog-quota-user=projects/dndandroid-27003
+[debug] [2025-06-25T23:40:43.822Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-06-25T23:40:44.019Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions 200
+[debug] [2025-06-25T23:40:44.020Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-06-25T23:40:44.020Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:40:44.020Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:40:44.020Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-06-25T23:40:44.020Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-06-25T23:40:44.162Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-06-25T23:40:44.162Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'dndandroid-27003'...
+[info] 
+[info] i  deploying functions 
+[debug] [2025-06-25T23:40:44.167Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:40:44.168Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:40:44.168Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003 [none]
+[debug] [2025-06-25T23:40:44.236Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003 200
+[debug] [2025-06-25T23:40:44.236Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003 {"projectNumber":"402888903343","projectId":"dndandroid-27003","lifecycleState":"ACTIVE","name":"DNDAndroid","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-06-25T21:47:38.382107Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-06-25T23:40:44.242Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:40:44.242Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:40:44.242Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/dndandroid-27003/adminSdkConfig [none]
+[debug] [2025-06-25T23:40:44.478Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/dndandroid-27003/adminSdkConfig 200
+[debug] [2025-06-25T23:40:44.478Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/dndandroid-27003/adminSdkConfig {"projectId":"dndandroid-27003","storageBucket":"dndandroid-27003.firebasestorage.app"}
+[debug] [2025-06-25T23:40:44.479Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:40:44.479Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:40:44.479Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/dndandroid-27003/configs [none]
+[debug] [2025-06-25T23:40:44.664Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/dndandroid-27003/configs 200
+[debug] [2025-06-25T23:40:44.664Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/dndandroid-27003/configs {}
+[debug] [2025-06-25T23:40:44.666Z] Customer code is not Node
+[debug] [2025-06-25T23:40:44.667Z] Validating python source
+[debug] [2025-06-25T23:40:44.667Z] Building python source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2025-06-25T23:40:44.669Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-06-25T23:40:44.682Z] Running command with virtualenv: command="C:\College_UTD\Summer_2024\Kotlin\DND\functions\venv\Scripts\activate.bat", args=["","&&","python.exe","-c","\"import firebase_functions; import os; print(os.path.dirname(firebase_functions.__file__))\""]
+[debug] [2025-06-25T23:40:44.876Z] stderr: Traceback (most recent call last):
+
+[debug] [2025-06-25T23:40:44.880Z] stderr:   File "<string>", line 1, in <module>
+    import firebase_functions; import os; print(os.path.dirname(firebase_functions.__file__))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'firebase_functions'
+
+[debug] [2025-06-25T23:40:44.958Z] Error: spawn "C:\College_UTD\Summer_2024\Kotlin\DND\functions\venv\Scripts\activate.bat" ENOENT
+    at notFoundError (C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:6:26)
+    at verifyENOENT (C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:40:16)
+    at cp.emit (C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:27:25)
+    at ChildProcess._handle.onexit (node:internal/child_process:294:12)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-06-25T23:45:58.386Z] ----------------------------------------------------------------------
+[debug] [2025-06-25T23:45:58.394Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions --debug
+[debug] [2025-06-25T23:45:58.395Z] CLI Version:   14.8.0
+[debug] [2025-06-25T23:45:58.395Z] Platform:      win32
+[debug] [2025-06-25T23:45:58.395Z] Node Version:  v20.14.0
+[debug] [2025-06-25T23:45:58.395Z] Time:          Wed Jun 25 2025 18:45:58 GMT-0500 (Central Daylight Time)
+[debug] [2025-06-25T23:45:58.395Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-06-25T23:45:58.644Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-06-25T23:45:58.647Z] > authorizing via signed-in user (lalith.chaitu@gmail.com)
+[debug] [2025-06-25T23:45:58.648Z] [iam] checking project dndandroid-27003 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-06-25T23:45:58.650Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:45:58.650Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:45:58.652Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions [none]
+[debug] [2025-06-25T23:45:58.652Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions x-goog-quota-user=projects/dndandroid-27003
+[debug] [2025-06-25T23:45:58.652Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-06-25T23:45:58.870Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions 200
+[debug] [2025-06-25T23:45:58.871Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-06-25T23:45:58.872Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:45:58.873Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:45:58.873Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-06-25T23:45:58.874Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-06-25T23:45:59.023Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-06-25T23:45:59.023Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'dndandroid-27003'...
+[info] 
+[info] i  deploying functions 
+[debug] [2025-06-25T23:45:59.029Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:45:59.029Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:45:59.030Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003 [none]
+[debug] [2025-06-25T23:45:59.098Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003 200
+[debug] [2025-06-25T23:45:59.098Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003 {"projectNumber":"402888903343","projectId":"dndandroid-27003","lifecycleState":"ACTIVE","name":"DNDAndroid","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-06-25T21:47:38.382107Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-06-25T23:45:59.102Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:45:59.102Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:45:59.103Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/dndandroid-27003/adminSdkConfig [none]
+[debug] [2025-06-25T23:45:59.302Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/dndandroid-27003/adminSdkConfig 200
+[debug] [2025-06-25T23:45:59.303Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/dndandroid-27003/adminSdkConfig {"projectId":"dndandroid-27003","storageBucket":"dndandroid-27003.firebasestorage.app"}
+[debug] [2025-06-25T23:45:59.304Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:45:59.305Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:45:59.307Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/dndandroid-27003/configs [none]
+[debug] [2025-06-25T23:45:59.431Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/dndandroid-27003/configs 200
+[debug] [2025-06-25T23:45:59.431Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/dndandroid-27003/configs {}
+[debug] [2025-06-25T23:45:59.433Z] Customer code is not Node
+[debug] [2025-06-25T23:45:59.434Z] Validating python source
+[debug] [2025-06-25T23:45:59.435Z] Building python source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2025-06-25T23:45:59.437Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-06-25T23:45:59.448Z] Running command with virtualenv: command="C:\College_UTD\Summer_2024\Kotlin\DND\functions\venv\Scripts\activate.bat", args=["","&&","python.exe","-c","\"import firebase_functions; import os; print(os.path.dirname(firebase_functions.__file__))\""]
+[debug] [2025-06-25T23:45:59.710Z] stderr: Traceback (most recent call last):
+
+[debug] [2025-06-25T23:45:59.716Z] stderr:   File "<string>", line 1, in <module>
+    import firebase_functions; import os; print(os.path.dirname(firebase_functions.__file__))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'firebase_functions'
+
+[debug] [2025-06-25T23:45:59.802Z] Error: spawn "C:\College_UTD\Summer_2024\Kotlin\DND\functions\venv\Scripts\activate.bat" ENOENT
+    at notFoundError (C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:6:26)
+    at verifyENOENT (C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:40:16)
+    at cp.emit (C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:27:25)
+    at ChildProcess._handle.onexit (node:internal/child_process:294:12)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-06-25T23:48:42.843Z] ----------------------------------------------------------------------
+[debug] [2025-06-25T23:48:42.846Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-06-25T23:48:42.846Z] CLI Version:   14.8.0
+[debug] [2025-06-25T23:48:42.847Z] Platform:      win32
+[debug] [2025-06-25T23:48:42.847Z] Node Version:  v20.14.0
+[debug] [2025-06-25T23:48:42.847Z] Time:          Wed Jun 25 2025 18:48:42 GMT-0500 (Central Daylight Time)
+[debug] [2025-06-25T23:48:42.847Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-06-25T23:48:43.069Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-06-25T23:48:43.070Z] > authorizing via signed-in user (lalith.chaitu@gmail.com)
+[debug] [2025-06-25T23:48:43.070Z] [iam] checking project dndandroid-27003 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-06-25T23:48:43.072Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:48:43.072Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:48:43.074Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions [none]
+[debug] [2025-06-25T23:48:43.074Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions x-goog-quota-user=projects/dndandroid-27003
+[debug] [2025-06-25T23:48:43.074Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-06-25T23:48:43.262Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions 200
+[debug] [2025-06-25T23:48:43.263Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-06-25T23:48:43.263Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:48:43.263Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:48:43.263Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-06-25T23:48:43.263Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-06-25T23:48:43.396Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-06-25T23:48:43.396Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/dndandroid-27003/serviceAccounts/dndandroid-27003@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'dndandroid-27003'...
+[info] 
+[info] i  deploying functions 
+[debug] [2025-06-25T23:48:43.401Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:48:43.401Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:48:43.401Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003 [none]
+[debug] [2025-06-25T23:48:43.477Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003 200
+[debug] [2025-06-25T23:48:43.477Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/dndandroid-27003 {"projectNumber":"402888903343","projectId":"dndandroid-27003","lifecycleState":"ACTIVE","name":"DNDAndroid","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-06-25T21:47:38.382107Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-06-25T23:48:43.482Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:48:43.482Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:48:43.482Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/dndandroid-27003/adminSdkConfig [none]
+[debug] [2025-06-25T23:48:43.658Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/dndandroid-27003/adminSdkConfig 200
+[debug] [2025-06-25T23:48:43.658Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/dndandroid-27003/adminSdkConfig {"projectId":"dndandroid-27003","storageBucket":"dndandroid-27003.firebasestorage.app"}
+[debug] [2025-06-25T23:48:43.659Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:48:43.659Z] Checked if tokens are valid: true, expires at: 1750896404294
+[debug] [2025-06-25T23:48:43.659Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/dndandroid-27003/configs [none]
+[debug] [2025-06-25T23:48:43.817Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/dndandroid-27003/configs 200
+[debug] [2025-06-25T23:48:43.817Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/dndandroid-27003/configs {}
+[debug] [2025-06-25T23:48:43.819Z] Customer code is not Node
+[debug] [2025-06-25T23:48:43.819Z] Validating python source
+[debug] [2025-06-25T23:48:43.819Z] Building python source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2025-06-25T23:48:43.821Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-06-25T23:48:43.833Z] Running command with virtualenv: command="C:\College_UTD\Summer_2024\Kotlin\DND\functions\venv\Scripts\activate.bat", args=["","&&","python.exe","-c","\"import firebase_functions; import os; print(os.path.dirname(firebase_functions.__file__))\""]
+[debug] [2025-06-25T23:48:43.998Z] stderr: Traceback (most recent call last):
+
+[debug] [2025-06-25T23:48:44.001Z] stderr:   File "<string>", line 1, in <module>
+    import firebase_functions; import os; print(os.path.dirname(firebase_functions.__file__))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'firebase_functions'
+
+[debug] [2025-06-25T23:48:44.099Z] Error: spawn "C:\College_UTD\Summer_2024\Kotlin\DND\functions\venv\Scripts\activate.bat" ENOENT
+    at notFoundError (C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:6:26)
+    at verifyENOENT (C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:40:16)
+    at cp.emit (C:\Users\vnrtm\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\lib\enoent.js:27:25)
+    at ChildProcess._handle.onexit (node:internal/child_process:294:12)
+[error] 
+[error] Error: An unexpected error has occurred.
