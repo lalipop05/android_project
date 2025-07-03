@@ -1,38 +1,29 @@
 package com.lali.dnd
 
 
-import LocationManager
+import MyLocationManager
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
 
-import android.Manifest
 import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Location
-import android.net.Uri
-import android.os.Build
 // Extension functions learn more NavHost syntax
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.ContextCompat
 import android.util.Log
 import android.os.Bundle
-import android.provider.Settings
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.IntentSenderRequest
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -40,21 +31,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.LocationSettingsStatusCodes
-import com.google.android.gms.location.Priority
-import com.google.android.gms.tasks.CancellationTokenSource
-import com.google.firebase.functions.HttpsCallableResult
 import com.lali.dnd.services.FirebaseFunctionsManager
-import com.lali.dnd.services.PermissionTracker
+import com.lali.dnd.services.EnvironmentValidator
 import com.lali.dnd.ui.theme.DNDTheme
-import com.lali.dnd.util.REQUEST_CHECK_SETTINGS
-import java.security.Permission
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
 
@@ -67,11 +53,9 @@ class MainActivity : ComponentActivity() {
         when (result.resultCode) {
             Activity.RESULT_OK -> {
                 Log.d("GPS", "User enabled location settings")
-                // Proceed with location operations
             }
             Activity.RESULT_CANCELED -> {
                 Log.d("GPS", "User declined to enable location settings")
-                // Handle the case where user didn't enable location
             }
         }
     }
@@ -96,6 +80,7 @@ class MainActivity : ComponentActivity() {
                         composable("main_screen") {
                             MainButton(
                                 navController,
+                                locationSettingsLauncher,
                                 modifier = Modifier.padding(innerPadding))
                         }
                     }
@@ -107,36 +92,44 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun MainButton(navController: NavController, modifier: Modifier = Modifier) {
+fun MainButton(navController: NavController,
+               locationSettingsLauncher: ActivityResultLauncher<IntentSenderRequest>,
+               modifier: Modifier) {
     var displayText by remember { mutableStateOf("")}
     var responseText by remember { mutableStateOf("BUM")}
+    var locationData by remember { mutableStateOf<Location?>(null) }
+
+    val coroutineScope = rememberCoroutineScope()
+
     val context = LocalContext.current
 
     Column (modifier = modifier){
         Button(onClick = {
-            val permissionGranted = LocationManager.checkPermission(context, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION))
+            val permissionGranted = EnvironmentValidator.checkPermission(context)
+            val locationEnabled = EnvironmentValidator.checkLocationProviders(context)
 
             if (!permissionGranted) {
                 navController.navigate("permission_screen")
-            } else {
-                LocationManager.getLastLocation(context) {location ->
+            } else if (!locationEnabled) {
+                EnvironmentValidator.locationEnabled(context, locationSettingsLauncher)
+            } else if (!EnvironmentValidator.googlePlayServiceChecker(context))  {
+                displayText = "GooglePlay services not available"
+            }
+            else {
+                MyLocationManager.getLastLocation(context) {location ->
                     if (location != null) {
-                        displayText = location.toString()
+                        locationData = location
+                        coroutineScope.launch {
+                            val responseJson = withContext(Dispatchers.IO) {
+                                MyLocationManager.getAddress(location)
+                            }
+                            displayText = responseJson ?: "null returned"
+                        }
                     } else {
-                        displayText = "null"
+                        displayText = "Location is null"
                     }
                 }
             }
-
-            FirebaseFunctionsManager.callFunction("on_call_example")  // Updated function name
-                .addOnSuccessListener { result ->
-                    val data = result.data as? Map<String, Any>
-                    val message = data?.get("message") as? String
-                    responseText = message ?: "No message"
-                }
-                .addOnFailureListener { e ->
-                    responseText = "Error: ${e.message}"
-                }
         }) {
             Text("Get Location")
         }
@@ -148,69 +141,33 @@ fun MainButton(navController: NavController, modifier: Modifier = Modifier) {
 fun LocationPermissionRequester(navController: NavController, modifier: Modifier) {
     val context = LocalContext.current
     var displayText by remember { mutableStateOf("We need some location permissions to continue!") }
-    var foregroundPermissionsGranted by remember { mutableStateOf(false) }
-    var backgroundPermissionGranted by remember { mutableStateOf(false) }
+    var locationPermissionsGranted by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        foregroundPermissionsGranted = LocationManager.checkPermission(context, LocationManager.FOREGROUND_PERMISSIONS)
-        backgroundPermissionGranted = LocationManager.checkPermission(context, LocationManager.BACKGROUND_PERMISSIONS)
-    }
-
-    LaunchedEffect(foregroundPermissionsGranted, backgroundPermissionGranted) {
-        if (foregroundPermissionsGranted && backgroundPermissionGranted) {
+        locationPermissionsGranted = EnvironmentValidator.checkPermission(context)
+        if (locationPermissionsGranted) {
             navController.navigate("main_screen")
         }
     }
 
-    val backgroundPermissionLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        backgroundPermissionGranted = isGranted
-        if (!isGranted) {
-            PermissionTracker.incrementBackgroundDenialCount(context)
-        }
-    }
-
-    val foregroundPermissionLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { permissions ->
-        foregroundPermissionsGranted = permissions.all { it.value }
-        if (!foregroundPermissionsGranted) {
-            PermissionTracker.incrementForegroundDenialCount(context)
-        }
-    }
-
-
     Column(modifier = modifier) {
-        Text(text = displayText)
+        Text(stringResource(R.string.permissions_reason, stringResource(R.string.app_name)))
+        Text(stringResource(R.string.permissions_step_1))
+        Text(stringResource(R.string.permissions_step_2))
+        Text(stringResource(R.string.permissions_step_3))
+        Text(stringResource(R.string.permissions_step_4))
+
         Button(onClick = {
-            when {
-                !foregroundPermissionsGranted -> {
-                    foregroundPermissionsGranted = LocationManager.checkPermission(context, LocationManager.FOREGROUND_PERMISSIONS)
-                    if (foregroundPermissionsGranted) {
-                        displayText = "Great! Now we need background location access."
-                    } else {
-                        if (PermissionTracker.foregroundPermanentlyDenied(context)) {
-                            LocationManager.openSettings(context)
-                        } else {
-                            foregroundPermissionLauncher.launch(LocationManager.FOREGROUND_PERMISSIONS)
-                        }
-                    }
-                }
-                !backgroundPermissionGranted -> {
-                    backgroundPermissionGranted = LocationManager.checkPermission(context, LocationManager.BACKGROUND_PERMISSIONS)
-                    if (PermissionTracker.backgroundPermanentlyDenied(context)) {
-                        LocationManager.openSettings(context)
-                    } else {
-                        backgroundPermissionLauncher.launch(LocationManager.BACKGROUND_PERMISSIONS[0])
-                    }
-                }
+            locationPermissionsGranted = EnvironmentValidator.checkPermission(context)
+            if (!locationPermissionsGranted) {
+                EnvironmentValidator.openSettings(context)
+            } else {
+                navController.navigate("main_screen")
             }
         }) {
             Text(
                 when {
-                    !foregroundPermissionsGranted -> "Grant Location Access"
-                    !backgroundPermissionGranted -> "Grant Background Access"
+                    !locationPermissionsGranted -> "Grant Location Access"
                     else -> "Continue"
                 }
             )

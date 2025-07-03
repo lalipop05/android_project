@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DND</string>
+    <string name="permissions_reason">%s needs location permissions to understand where you are currently and make an accurate decision about the status of notifications on your phone. As such, we request precise location data that can be accessed in the background. Don\'t worry about your battery, we try to use as little battery as we can. Privacy is not any issue! Explain</string>
+    <string name="permissions_step_1">Permissions</string>
+    <string name="permissions_step_2">Location</string>
+    <string name="permissions_step_3">Allow all the time</string>
+    <string name="permissions_step_4">Precise location</string>
 </resources>

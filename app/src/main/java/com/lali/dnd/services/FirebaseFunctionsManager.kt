@@ -12,20 +12,20 @@ object FirebaseFunctionsManager {
     fun getInstance(): FirebaseFunctions = functions
 
     fun callFunction(functionName: String,
-                     data: Map<String, Any>? = null,
-                     onSuccess: (Map<String, Any>?) -> Unit,
+                     data: String? = null,
+                     onSuccess: (String?) -> Unit,
                      onFailure: (Exception) -> Unit)
     {
         functions.getHttpsCallable(functionName)
             .call(data).addOnSuccessListener { result ->
-                val responseData = result.data as? Map<String, Any>
+                val responseData = result.data as String
                 onSuccess(responseData)
 
             }.addOnFailureListener(onFailure)
     }
 
     fun callFunction(functionName: String,
-                     data: Map<String, Any>? = null): Task<HttpsCallableResult> {
+                     data: String? = null): Task<HttpsCallableResult> {
         return functions.getHttpsCallable(functionName).call(data)
     }
 }
